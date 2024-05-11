@@ -304,7 +304,7 @@ label {
 }
 
 select {
-  width: 70px;
+  width: 80px;
   height: 30px;
   font-size: 20px;
 }
@@ -330,11 +330,7 @@ select {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: auto;
-  height: 230px;
-  padding-left: 20px;
   margin-top: 10px;
-  margin-left: 15px;
 }
 
 .asset-name {
