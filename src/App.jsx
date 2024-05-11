@@ -76,9 +76,9 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container"> {/* New container for layout */}
+      <div className="app-container">
         <Navbar />
-        <div className="main-content"> {/* Main content area */}
+        <div className="main-content">
           <Routes>
             <Route path="/" element={<Home cryptoAssets={cryptoAssets} totalValue={totalValue} />} />
             <Route path="/market" element={<Market cryptoData={cryptoData} favorites={favorites} setFavorites={setFavorites} />} />

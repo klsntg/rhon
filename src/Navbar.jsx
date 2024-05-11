@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import dashboard from './assets/dashboard.svg'
 import logo from './assets/logo.svg'
 import market from './assets/market.svg'
-import transaction from './assets/transaction.svg'
 import watchlist from './assets/watchlist.svg'
 import buyandsell from './assets/buyandsell.svg'
 

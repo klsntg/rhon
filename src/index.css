@@ -229,10 +229,9 @@ display: flex;
 }
 
 .watchlist-chart {
-  width: 100%;
-  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
+  align-items: center; 
 }
 
 .searchCoin-container {
