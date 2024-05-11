@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Home from './Home';
-import Market from './Market';
-import Watchlist from './Watchlist';
-import Navbar from './Navbar';
-import CryptoDetails from './CryptoDetails';
+import Home from "./Home";
+import Market from "./Market";
+import Watchlist from "./Watchlist";
+import Navbar from "./Navbar";
+import CryptoDetails from "./CryptoDetails";
 import BuySell from "./BuySell";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
   const [cryptoData, setCryptoData] = useState([]);
   const [cryptoAssets, setCryptoAssets] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
+  const [initialAssetsSet, setInitialAssetsSet] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,20 +31,45 @@ function App() {
           }
         );
         setCryptoData(response.data);
+
+        // Update cryptoAssets with latest prices
+        setCryptoAssets(prevAssets => {
+          return prevAssets.map(asset => {
+            const updatedPrice = response.data.find(data => data.symbol.toUpperCase() === asset.symbol);
+            if (updatedPrice) {
+              // Check if the asset is Tether and set its current_price to 1
+              if (asset.symbol.toUpperCase() === 'USDT') {
+                return {
+                  ...asset,
+                  current_price: 1,
+                };
+              }
+              return {
+                ...asset,
+                current_price: updatedPrice.current_price,
+              };
+            }
+            return asset;
+          });
+        });
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
+
+    const fetchDataInterval = setInterval(fetchData, 1 * 60 * 1000);
+    return () => clearInterval(fetchDataInterval);
   }, []);
 
   useEffect(() => {
-    const tetherData = cryptoData.find(asset => asset.symbol === 'usdt');
-  
-    if (tetherData) {
-      const initialAssets = cryptoData.map(asset => {
-        if (asset.symbol === 'usdt') {
+    const tetherData = cryptoData.find((asset) => asset.symbol === "usdt");
+
+    if (tetherData && !initialAssetsSet) {
+      const initialAssets = cryptoData.map((asset) => {
+        if (asset.symbol === "usdt") {
           return {
             image: tetherData.image,
             name: tetherData.name,
@@ -61,18 +87,19 @@ function App() {
           };
         }
       });
-  
+
       setCryptoAssets(initialAssets);
+      setInitialAssetsSet(true);
     }
-  }, [cryptoData]);
+  }, [cryptoData, initialAssetsSet]);
 
   useEffect(() => {
     const total = cryptoAssets.reduce((acc, asset) => {
-      return acc + (asset.current_price * asset.amount);
+      return acc + asset.current_price * asset.amount;
     }, 0);
 
     setTotalValue(total);
-  }, [cryptoAssets]); 
+  }, [cryptoAssets]);
 
   return (
     <Router>

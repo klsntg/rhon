@@ -6,6 +6,7 @@ import "chart.js/auto";
 
 const CryptoDetails = ({ cryptoData }) => {
   const [chartData, setChartData] = useState(null);
+  const [days, setDays] = useState(365); // Default to 365 days
   const { cryptoId } = useParams();
 
   useEffect(() => {
@@ -14,7 +15,7 @@ const CryptoDetails = ({ cryptoData }) => {
         const response = await axios.get(
           `https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart`,
           {
-            params: { vs_currency: "usd", days: "365" },
+            params: { vs_currency: "usd", days },
             headers: {
               accept: "application/json",
               "x-cg-demo-api-key": "CG-Wdo5iVvwZTf2tJ1AKtXxk4jk",
@@ -32,14 +33,24 @@ const CryptoDetails = ({ cryptoData }) => {
     };
 
     fetchChartData();
-  }, [cryptoId]);
+  }, [cryptoId, days]);
+
+  const handleButtonClick = (days) => {
+    setDays(days);
+  };
 
   if (!chartData) return <div>Loading chart data...</div>;
 
   return (
     <div>
-      <h1>Historical Price Chart (Last 365 Days)</h1>
+      <h1>Historical Price Chart (Last {days} {days === 1 ? "Day" : "Days"})</h1>
       {/* <div style={{ height: '400px', width: '80%' }}> */}
+      <div>
+        <button onClick={() => handleButtonClick(1)}>1 Day</button>
+        <button onClick={() => handleButtonClick(7)}>7 Days</button>
+        <button onClick={() => handleButtonClick(30)}>30 Days</button>
+        <button onClick={() => handleButtonClick(365)}>365 Days</button>
+      </div>
   <Line
     data={{
       labels: chartData.map(({ time }) => new Date(time).toLocaleDateString()),
