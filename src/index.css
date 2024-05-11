@@ -48,7 +48,7 @@ td a {
 }
 
 .add-to-watchlist-card {
- display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   border: 3px solid white;
@@ -348,6 +348,22 @@ select {
   font-weight: 700;
 }
 
+.buy-sell-card {
+  width: fit-content;
+  height: auto;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 20px 20px 20px 20px;
+  margin-top: -150px;
+}
 
-
-
+.buy-sell-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 100vh;
+}

@@ -135,55 +135,60 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets}) => {
             </div>
             {selectedCoin ? (
                 <>
-                    <div>
-                        <img src={selectedCoin.image} alt={selectedCoin.name} style={{ width: "40px", height: "40px" }} />
-                        <span className="selected-coin-name">{selectedCoin.name} ({selectedCoin.symbol.toUpperCase()})</span>
-                    </div>
-                    <br />
-                    <div>
-                        <label>Buy or Sell:</label>
-                        <select value={buyOrSell} onChange={(e) => handleBuySellSelect(e.target.value)}>
-                            <option value="buy">Buy</option>
-                            <option value="sell">Sell</option>
-                        </select>
+                    <div className="buy-sell-card-container">
+                        <div className="buy-sell-card">
+                            <div>
+                                <img src={selectedCoin.image} alt={selectedCoin.name} style={{ width: "40px", height: "40px" }} />
+                                <span className="selected-coin-name">{selectedCoin.name} ({selectedCoin.symbol.toUpperCase()})</span>
+                            </div>
+                            <br />
+                            <div>
+                                <label>Buy or Sell:</label>
+                                <select value={buyOrSell} onChange={(e) => handleBuySellSelect(e.target.value)}>
+                                    <option value="buy">Buy</option>
+                                    <option value="sell">Sell</option>
+                                </select>
+                                </div>
+                                <br/>
+                                <div>
+                                <label>Market Price: {selectedCoin.current_price}</label>
+                                </div>
+                                <br/>
+                                <div>
+                                <label>Amount:</label>
+                                <select value={selectedOption} onChange={(e) => handleOptionSelect(e.target.value)}>
+                                    <option value="amount">{selectedCoin.symbol.toUpperCase()}</option>
+                                    <option value="usdt">USDT</option>
+                                </select>
+                                {selectedOption === "amount" ? (
+                                    <input className="input-amount" type="number" value={amount} onChange={handleAmountChange} />
+                                ) : (
+                                    <input className="input-amount" type="number" value={usdtValue} onChange={handleUsdtValueChange} />
+                                )}
+                                </div>
+                                <br/>
+                                <div>
+                                {buyOrSell === "buy" ? (
+                                    <>
+                                    <label>Available:</label>
+                                    <span>{cryptoAssets.find(asset => asset.symbol === 'USDT').amount.toFixed(2)} USDT</span>
+                                    </>
+                                ) : (
+                                    <>
+                                    <label>Available {selectedCoin.symbol}:</label>
+                                    <span>{selectedCoin.amount}</span>
+                                    </>
+                                )}
+                                </div>
+                                <br/>
+                                <button className="buy-sell-button" onClick={handleBuy} disabled={buyOrSell === 'sell' && !cryptoAssets.some(asset => asset.symbol === selectedCoin.symbol)}>
+                                {buttonText}
+                                </button>
+                                <br/>
+                                <br/>
+                            </div>
                         </div>
-                        <br/>
-                        <div>
-                        <label>Market Price: {selectedCoin.current_price}</label>
-                        </div>
-                        <br/>
-                        <div>
-                        <label>Amount:</label>
-                        <select value={selectedOption} onChange={(e) => handleOptionSelect(e.target.value)}>
-                            <option value="amount">{selectedCoin.symbol.toUpperCase()}</option>
-                            <option value="usdt">USDT</option>
-                        </select>
-                        {selectedOption === "amount" ? (
-                            <input className="input-amount" type="number" value={amount} onChange={handleAmountChange} />
-                        ) : (
-                            <input className="input-amount" type="number" value={usdtValue} onChange={handleUsdtValueChange} />
-                        )}
-                        </div>
-                        <br/>
-                        <div>
-                        {buyOrSell === "buy" ? (
-                            <>
-                            <label>Available:</label>
-                            <span>{cryptoAssets.find(asset => asset.symbol === 'USDT').amount.toFixed(2)} USDT</span>
-                            </>
-                        ) : (
-                            <>
-                            <label>Available {selectedCoin.symbol}:</label>
-                            <span>{selectedCoin.amount}</span>
-                            </>
-                        )}
-                        </div>
-                        <br/>
-                        <button className="buy-sell-button" onClick={handleBuy} disabled={buyOrSell === 'sell' && !cryptoAssets.some(asset => asset.symbol === selectedCoin.symbol)}>
-                        {buttonText}
-                        </button>
-                        <br/>
-                        <br/>        </>
+                    </>
             ) : (
                 <div>
                     <p>Please select a coin from the search bar.</p>
