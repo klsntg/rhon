@@ -9,7 +9,11 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(135deg, #dff4f4, #f5e7ec, #e8f3ff, #d5f6e9);
+  background-image: linear-gradient(135deg, #98dddd, #eac6d3, #acccee, #a2e8cc);
+}
+
+h1 {
+  margin-top: 40px;
 }
 
 /* Market */
@@ -40,7 +44,6 @@ td a {
   display: flex;
   align-items: center;
   flex-direction: column;
-
 }
 
 .crypto-card img {
@@ -53,7 +56,7 @@ td a {
   align-items: center;
   border: 3px solid white;
   border-radius: 8px;
-  text-decoration: none;    
+  text-decoration: none;
   color: #333;
 }
 
@@ -117,7 +120,7 @@ td a {
 .toggle-button {
   height: 40px;
   width: 200px;
-  background-color: #D5D7DF;
+  background-color: #d5d7df;
   border: none;
   border-radius: 20px;
   margin-bottom: 30px;
@@ -125,13 +128,13 @@ td a {
 }
 
 .sidebar {
-  position: fixed; /* Fixed position so it doesn't move with scrolling */
+  position: fixed;
   top: 0;
   left: 0;
-  height: 100%; /* Full height of the viewport */
-  width: 250px; /* Width of the sidebar */
-  background-image: linear-gradient(155deg, #dff4f4, #f5e7ec, #e8f3ff);
-  padding: 20px; /* Padding inside the sidebar */
+  height: 100%;
+  width: 250px;
+  background: rgb(249, 241, 241);
+  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -151,11 +154,11 @@ td a {
   text-decoration: none;
   padding: 10px;
   border-radius: 4px;
-  transition: background-image 0.9s ease; 
+  transition: background-image 0.9s ease;
 }
 
 .sidebar a:hover {
-  background-image: url('assets/sidebar.png'); 
+  background-image: url('assets/sidebar.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -177,15 +180,13 @@ td a {
 }
 
 .app-container {
-display: flex;
-  height: 100vh; /* Full viewport height */
-  
+  display: flex;
+  height: 100vh;
 }
 
 .main-content {
-  flex-grow: 1; /* Allows the main content to take up remaining space */
-  margin-left: 17%;
-  
+  flex-grow: 1;
+  margin-left: 18.5%;
 }
 
 .centered-table {
@@ -204,8 +205,7 @@ display: flex;
   height: 50px;
   font-size: 18px;
   font-weight: 700;
-  background-color: #D5D7DF;
-  
+  background-color: #d5d7df;
 }
 
 .left-align-content {
@@ -224,14 +224,13 @@ display: flex;
   padding-left: 10px;
   margin-left: 5px;
   border: none;
-  background-color: #D5D7DF;
-  
+  background-color: #d5d7df;
 }
 
 .watchlist-chart {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 
 .searchCoin-container {
@@ -251,7 +250,7 @@ display: flex;
   padding-left: 10px;
   margin-left: 5px;
   border: none;
-  background-color: #D5D7DF;
+  background-color: #d5d7df;
 }
 
 .filtered-coins {
@@ -279,7 +278,6 @@ display: flex;
   margin-left: 10px;
   font-weight: 400;
   font-size: 18px;
-  
 }
 
 .selected-coin-name {
@@ -291,6 +289,7 @@ display: flex;
 label {
   font-weight: 700;
   font-size: 20px;
+  border-radius: 100px;
 }
 
 .buy-sell-button {
@@ -299,8 +298,9 @@ label {
   font-size: 20px;
   border-radius: 20px;
   border: none;
-  background-color: #D5D7DF;
+  background-color: #d5d7df;
   font-weight: 700;
+  margin-bottom: -30px;
 }
 
 select {
@@ -314,12 +314,19 @@ select {
   height: 25px;
   font-size: 20px;
   margin-left: 10px;
+  align-items: center;
+  border-radius: 12px;
+  margin-top: 23px;
+}
+
+.input-select {
+  border-radius: 12px;
 }
 
 .asset-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 10px;
+  gap: 70px;
 }
 
 .asset-card {
@@ -360,6 +367,68 @@ select {
 .buy-sell-card-container {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   height: 100vh;
 }
+
+/* Add a breakpoint for iPhones */
+@media only screen and (max-width: 375px) {
+  body {
+    font-size: 14px; /* Adjust font size for better readability on smaller screens */
+  }
+  
+  .sidebar {
+    display: none; /* Hide the sidebar on smaller screens */
+  }
+  
+  .main-content {
+    margin-left: 0; /* Remove left margin for main content */
+  }
+  
+  .centered-table {
+    width: 90%; /* Reduce table width for smaller screens */
+  }
+  
+  .search {
+    width: 200px; /* Adjust search input width */
+  }
+  
+  .buy-sell-card {
+    width: 90%; /* Adjust width of buy-sell card */
+    margin-top: -100px; /* Adjust margin-top for better positioning */
+  }
+  
+  .buy-sell-card-container {
+    height: auto; /* Adjust height for better positioning */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    display: none; /* Hide the sidebar on smaller screens */
+  }
+
+  .main-content {
+    margin-left: 0; /* Remove left margin for main content */
+  }
+
+  .centered-table {
+    width: 90%; /* Reduce table width for smaller screens */
+  }
+
+  .search {
+    width: 200px; /* Adjust search input width */
+  }
+
+  .buy-sell-card {
+    width: 90%; /* Adjust width of buy-sell card */
+    margin-top: -100px; /* Adjust margin-top for better positioning */
+  }
+
+  .buy-sell-card-container {
+    height: auto; /* Adjust height for better positioning */
+  }
+}
+
+
+

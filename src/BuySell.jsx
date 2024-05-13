@@ -115,7 +115,7 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets }) => {
 
     return (
         <div>
-            <h2>Buy and Sell</h2>
+            <h1>Buy and Sell</h1>
             <div className="searchCoin-container">
                 <div className="searchCoin">
                     <input className="search-coin" type="text" value={searchTerm} onChange={handleSearchTermChange} placeholder="Search Coin" />
@@ -148,7 +148,7 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets }) => {
                             <br />
                             <div>
                                 <label>Buy or Sell:</label>
-                                <select value={buyOrSell} onChange={(e) => handleBuySellSelect(e.target.value)}>
+                                <select className="input-select" select value={buyOrSell} onChange={(e) => handleBuySellSelect(e.target.value)}>
                                     <option value="buy">Buy</option>
                                     <option value="sell">Sell</option>
                                 </select>
@@ -160,7 +160,7 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets }) => {
                             <br />
                             <div>
                                 <label>Currency:</label>
-                                <select value={selectedOption} onChange={(e) => handleOptionSelect(e.target.value)}>
+                                <select className="input-select" select value={selectedOption} onChange={(e) => handleOptionSelect(e.target.value)}>
                                     <option value="amount">{selectedCoin.symbol.toUpperCase()}</option>
                                     <option value="usdt">USDT</option>
                                 </select>
