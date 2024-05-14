@@ -14,6 +14,7 @@ body {
 
 h1 {
   margin-top: 40px;
+  font-size: 50px;
 }
 
 /* Market */
@@ -50,6 +51,10 @@ td a {
   margin-left: 10px;
 }
 
+.watchlist-container {
+  padding-right: 20px;
+}
+
 .add-to-watchlist-card {
   display: flex;
   justify-content: center;
@@ -74,10 +79,6 @@ td a {
 .add-to-watchlist-card-content p:last-child {
   font-size: 18px;
   margin-bottom: 49.45px;
-}
-
-.watchlist-container {
-  padding: 20px;
 }
 
 .crypto-cards.list {
@@ -349,8 +350,23 @@ select {
   margin-top: -10px;
   font-size: 40px;
   font-weight: 700;
+  justify-content: center;
+  align-items: center;
 }
 
+.asset-price {
+  margin-top: -20px;
+  font-size: 30px;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-estimated-value {
+  margin-top: -10px;
+  font-size: 40px;
+  font-weight: 700;
+}
 .buy-sell-card {
   width: fit-content;
   height: auto;
@@ -369,6 +385,27 @@ select {
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: column;
+  height: 5vh;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}
+
+.page {
+  background-color: transparent;
+  border: none;
+  border-radius: 50px;
+  padding: 10px;
+  margin: 10px;
 }
 
 /* Add a breakpoint for iPhones */

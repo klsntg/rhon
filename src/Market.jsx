@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
+import Pagination from './Pagination'; // Ensure this component is correctly imported
 
 const Market = ({ cryptoData, favorites, setFavorites }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(7);
+
+  const searchRef = useRef(false); // Reference to track search term changes
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -10,7 +15,7 @@ const Market = ({ cryptoData, favorites, setFavorites }) => {
 
   const handleFavorite = (symbol) => {
     if (favorites.includes(symbol)) {
-      setFavorites(favorites.filter((fav) => fav !== symbol));
+      setFavorites(favorites.filter((fav) => fav!== symbol));
     } else {
       setFavorites([...favorites, symbol]);
     }
@@ -21,6 +26,20 @@ const Market = ({ cryptoData, favorites, setFavorites }) => {
       crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredCryptoData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(filteredCryptoData.length / itemsPerPage);
+
+  // Reset page index to 1 when search term changes
+  useEffect(() => {
+    if (searchRef.current) {
+      setCurrentPage(1);
+    }
+    searchRef.current = true;
+  }, [searchTerm]);
 
   return (
     <div>
@@ -46,41 +65,44 @@ const Market = ({ cryptoData, favorites, setFavorites }) => {
           </tr>
         </thead>
         <tbody>
-          {filteredCryptoData.map((crypto, index) => (
-              <tr key={index}>
-                <td className="centered-cell">
-                  <input
-                    type="checkbox"
-                    checked={favorites.includes(crypto.symbol)}
-                    onChange={() => handleFavorite(crypto.symbol)}
+          {currentItems.map((crypto, index) => (
+            <tr key={index}>
+              <td className="centered-cell">
+                <input
+                  type="checkbox"
+                  checked={favorites.includes(crypto.symbol)}
+                  onChange={() => handleFavorite(crypto.symbol)}
+                />
+              </td>
+              <td className="centered-cell left-align-content" >
+                <Link to={`/crypto/${crypto.id}`} style={{ display: 'flex', alignItems: 'center' }}>
+                  <img
+                    src={crypto.image}
+                    alt={crypto.name}
+                    style={{ width: "35px", height: "35px" }}
                   />
-                </td>
-                <td className="centered-cell left-align-content" >
-                  <Link to={`/crypto/${crypto.id}`} style={{ display: 'flex', alignItems: 'center' }}>
-                    <img
-                      src={crypto.image}
-                      alt={crypto.name}
-                      style={{ width: "35px", height: "35px" }}
-                    />
-                    <p className="crypto-name">{crypto.name}</p>
-                  </Link>
-                </td>
-                <td className="centered-cell">{crypto.symbol.toUpperCase()}</td>
-                <td className="centered-cell">${crypto.current_price.toLocaleString()}</td>
-                <td className="centered-cell" style={{ color: crypto.price_change_percentage_24h >= 0? 'green' : 'red' }}>
-                  {crypto.price_change_percentage_24h.toFixed(2)}% </td>
-                <td className="centered-cell">${crypto.total_volume.toLocaleString()}</td>
-                <td className="centered-cell">{crypto.circulating_supply.toLocaleString()}</td>
-                <td className="centered-cell">
-                  {crypto.total_supply
-                   ? crypto.total_supply.toLocaleString()
-                    : "-"}
-                </td>
-                <td className="centered-cell">${crypto.market_cap.toLocaleString()}</td>
-              </tr>
+                  <p className="crypto-name">{crypto.name}</p>
+                </Link>
+              </td>
+              <td className="centered-cell">{crypto.symbol.toUpperCase()}</td>
+              <td className="centered-cell">${crypto.current_price.toLocaleString()}</td>
+              <td className="centered-cell" style={{ color: crypto.price_change_percentage_24h >= 0? 'green' : 'red' }}>
+                {crypto.price_change_percentage_24h.toFixed(2)}% </td>
+              <td className="centered-cell">${crypto.total_volume.toLocaleString()}</td>
+              <td className="centered-cell">{crypto.circulating_supply.toLocaleString()}</td>
+              <td className="centered-cell">
+                {crypto.total_supply
+              ? crypto.total_supply.toLocaleString()
+                  : "-"}
+              </td>
+              <td className="centered-cell">${crypto.market_cap.toLocaleString()}</td>
+            </tr>
           ))}
         </tbody>
       </table>
+      <div className="pagination-container">
+        <Pagination onPageChange={setCurrentPage} currentPage={currentPage} totalPages={totalPages} />
+      </div>
     </div>
   );
 };
