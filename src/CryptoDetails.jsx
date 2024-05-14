@@ -45,7 +45,7 @@ const CryptoDetails = ({ cryptoData }) => {
     <div>
       <h1>Historical Price Chart (Last {days} {days === 1 ? "Day" : "Days"})</h1>
       {/* <div style={{ height: '400px', width: '80%' }}> */}
-      <div>
+      <div className ="button-days">
         <button onClick={() => handleButtonClick(1)}>1 Day</button>
         <button onClick={() => handleButtonClick(7)}>7 Days</button>
         <button onClick={() => handleButtonClick(30)}>30 Days</button>

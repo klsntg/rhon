@@ -134,7 +134,7 @@ td a {
   left: 0;
   height: 100%;
   width: 250px;
-  background: rgb(249, 241, 241);
+  background: rgb(254, 254, 254);
   padding: 20px;
   box-sizing: border-box;
 }
@@ -287,6 +287,15 @@ td a {
   font-size: 40px;
 }
 
+.coin-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.coin-item:hover:not(.selected-coin) {
+  background: rgb(192, 188, 188);
+}
+
 label {
   font-weight: 700;
   font-size: 20px;
@@ -302,7 +311,33 @@ label {
   background-color: #d5d7df;
   font-weight: 700;
   margin-bottom: -30px;
+  transition: background-color 0.3s ease; 
 }
+
+.buy-sell-button:hover {
+  background-color: rgb(153, 234, 218); 
+}
+
+.button-days {
+  display: flex;
+  justify-content:space-evenly;
+}
+
+.button-days button {
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  border: none;
+  background-color: #d5d7df;
+  border-radius: 10px; /* Add border radius for rounder corners */
+  cursor: pointer;
+  margin: 0 0 0 0px;
+}
+
+.button-days button:hover {
+  background-color: #ccc; /* Change background color on hover */
+}
+
 
 select {
   width: 80px;

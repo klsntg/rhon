@@ -116,27 +116,27 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets }) => {
     return (
         <div>
             <h1>Buy and Sell</h1>
-            <div className="searchCoin-container">
-                <div className="searchCoin">
-                    <input className="search-coin" type="text" value={searchTerm} onChange={handleSearchTermChange} placeholder="Search Coin" />
-                    <div className="filtered-coins">
-                        {filteredCoins.length > 0 && (
-                            <div style={{ height: "300px", width: "270px", overflowY: "auto" }}>
-                                {filteredCoins.map((coin) => (
-                                    <div key={coin.id} onClick={() => handleCoinSelect(coin)}>
-                                        <img
-                                            src={coin.image}
-                                            alt={coin.name}
-                                            style={{ width: "30px", height: "30px" }}
-                                        />
-                                        <span className="coin-name">{coin.name} ({coin.symbol.toUpperCase()})</span>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                    <div className="searchCoin-container">
+                        <div className="searchCoin">
+                            <input className="search-coin" type="text" value={searchTerm} onChange={handleSearchTermChange} placeholder="Search Coin" />
+                            <div className="filtered-coins">
+                                {filteredCoins.length > 0 && (
+                                    <div style={{ height: "300px", width: "270px", overflowY: "auto" }}>
+                                    {filteredCoins.map((coin) => (
+                        <div key={coin.id} onClick={() => handleCoinSelect(coin)} className={`coin-item ${selectedCoin === coin ? "selected-coin" : ""}`}>
+                            <img
+                                src={coin.image}
+                                alt={coin.name}
+                                style={{ width: "30px", height: "30px" }}
+                            />
+                            <span className="coin-name">{coin.name} ({coin.symbol.toUpperCase()})</span>
+                        </div>
+                    ))}
                 </div>
-            </div>
+            )}
+        </div>
+    </div>
+</div>
             {selectedCoin ? (
                 <>
                     <div className="buy-sell-card-container">
