@@ -44,27 +44,30 @@ const CryptoDetails = ({ cryptoData }) => {
   return (
     <div>
       <h1>Historical Price Chart (Last {days} {days === 1 ? "Day" : "Days"})</h1>
-      {/* <div style={{ height: '400px', width: '80%' }}> */}
-      <div className ="button-days">
+      <div className="button-days">
         <button onClick={() => handleButtonClick(1)}>1 Day</button>
         <button onClick={() => handleButtonClick(7)}>7 Days</button>
         <button onClick={() => handleButtonClick(30)}>30 Days</button>
         <button onClick={() => handleButtonClick(365)}>365 Days</button>
       </div>
-  <Line
-    data={{
-      labels: chartData.map(({ time }) => new Date(time).toLocaleDateString()),
-      datasets: [{
-        label: 'Price (USD)',
-        data: chartData.map(({ price }) => price),
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-      }]
-    }}
-  />
-{/* </div> */}
-      {/* Render other details of the cryptocurrency */}
+      <div className="chart-container" style={{ height: '600px', width: '100%' }}>
+        <Line
+          data={{
+            labels: chartData.map(({ time }) => new Date(time).toLocaleDateString()),
+            datasets: [{
+              label: 'Price (USD)',
+              data: chartData.map(({ price }) => price),
+              fill: false,
+              borderColor: 'rgb(75, 192, 192)',
+              tension: 0.1
+            }]
+          }}
+          options={{
+            responsive: true,
+            maintainAspectRatio: false // Ensure the chart fits its container
+          }}
+        />
+      </div>
     </div>
   );
 };
