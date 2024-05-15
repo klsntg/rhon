@@ -133,10 +133,61 @@ td a {
   top: 0;
   left: 0;
   height: 100%;
-  width: 250px;
+  width: 270px; 
   background: rgb(254, 254, 254);
   padding: 20px;
   box-sizing: border-box;
+  transition: width 0.3s ease; 
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-toggle {
+  cursor: pointer;
+}
+
+.hamburger {
+  position: relative;
+  margin-top: 10px;
+  width: 30px;
+  height: 44px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 5px;
+  background-color: black;
+  border-radius: 4px;
+}
+
+.hamburger span.bar {
+  transition: transform 0.3s ease-out;
+}
+
+.hamburger.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 .sidebar ul {
@@ -169,7 +220,7 @@ td a {
 }
 
 .logoName {
-  margin-left: 10px;
+  margin-left: 15px;
   font-weight: 700;
   font-size: 25px;
 }
@@ -338,7 +389,6 @@ label {
   background-color:  rgb(153, 234, 218); 
 }
 
-
 select {
   width: 80px;
   height: 30px;
@@ -443,64 +493,40 @@ select {
   margin: 10px;
 }
 
-/* Add a breakpoint for iPhones */
-@media only screen and (max-width: 375px) {
-  body {
-    font-size: 14px; /* Adjust font size for better readability on smaller screens */
-  }
-  
+@media (max-width: 767px) {
+
   .sidebar {
-    display: none; /* Hide the sidebar on smaller screens */
+    width: 0; 
+    overflow: hidden; 
+    position: absolute;
+    top: 0; 
+    left: -250px; 
+    transition: left 0.3s ease; 
+    background-color: white; 
+    z-index: 998; 
   }
-  
-  .main-content {
-    margin-left: 0; /* Remove left margin for main content */
+
+  .hamburger {
+    display: block;
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    z-index: 999; 
+    cursor: pointer; 
+   
   }
-  
-  .centered-table {
-    width: 90%; /* Reduce table width for smaller screens */
+
+  .hamburger span {
+    width: 100%;
+    height: 3px;
+    background-color: black; 
+    border-radius: 4px;
+    display: block; 
+    margin-bottom: 5px; 
   }
-  
-  .search {
-    width: 200px; /* Adjust search input width */
-  }
-  
-  .buy-sell-card {
-    width: 90%; /* Adjust width of buy-sell card */
-    margin-top: -100px; /* Adjust margin-top for better positioning */
-  }
-  
-  .buy-sell-card-container {
-    height: auto; /* Adjust height for better positioning */
+
+  .sidebar.open {
+    left: 0px; 
+    width: 240px;
   }
 }
-
-@media only screen and (max-width: 768px) {
-  .sidebar {
-    display: none; /* Hide the sidebar on smaller screens */
-  }
-
-  .main-content {
-    margin-left: 0; /* Remove left margin for main content */
-  }
-
-  .centered-table {
-    width: 90%; /* Reduce table width for smaller screens */
-  }
-
-  .search {
-    width: 200px; /* Adjust search input width */
-  }
-
-  .buy-sell-card {
-    width: 90%; /* Adjust width of buy-sell card */
-    margin-top: -100px; /* Adjust margin-top for better positioning */
-  }
-
-  .buy-sell-card-container {
-    height: auto; /* Adjust height for better positioning */
-  }
-}
-
-
-
