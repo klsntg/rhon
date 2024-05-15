@@ -324,18 +324,18 @@ label {
 }
 
 .button-days button {
-  width: 80px;
-  height: 30px;
-  font-size: 14px;
+  width: 73px;
+  height: 20px;
+  font-size: 12px;
   border: none;
   background-color: #d5d7df;
-  border-radius: 10px; /* Add border radius for rounder corners */
+  border-radius: 8px; /* Add border radius for rounder corners */
   cursor: pointer;
   margin: 0 0 0 0px;
 }
 
 .button-days button:hover {
-  background-color: #ccc; /* Change background color on hover */
+  background-color:  rgb(153, 234, 218); 
 }
 
 
