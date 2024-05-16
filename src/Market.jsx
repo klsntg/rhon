@@ -13,11 +13,26 @@ const Market = ({ cryptoData, favorites, setFavorites }) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleFavorite = (symbol) => {
-    if (favorites.includes(symbol)) {
-      setFavorites(favorites.filter((fav) => fav!== symbol));
+  const handleFavorite = (symbol, checked) => {
+    let confirmationMessage = "";
+    let successMessage = "";
+    
+    if (checked) {
+      confirmationMessage = "Are you sure you want to add this cryptocurrency to favorites?";
+      successMessage = "Successfully added to Watchlist.";
     } else {
-      setFavorites([...favorites, symbol]);
+      confirmationMessage = "Are you sure you want to remove this cryptocurrency from favorites?";
+      successMessage = "Successfully removed from Watchlist.";
+    }
+
+    const confirmed = window.confirm(confirmationMessage);
+    if (confirmed) {
+      if (checked) {
+        setFavorites([...favorites, symbol]);
+      } else {
+        setFavorites(favorites.filter((fav) => fav!== symbol));
+      }
+      alert(successMessage);
     }
   };
 
@@ -71,7 +86,7 @@ const Market = ({ cryptoData, favorites, setFavorites }) => {
                 <input
                   type="checkbox"
                   checked={favorites.includes(crypto.symbol)}
-                  onChange={() => handleFavorite(crypto.symbol)}
+                  onChange={(e) => handleFavorite(crypto.symbol, e.target.checked)}
                 />
               </td>
               <td className="centered-cell left-align-content" >
