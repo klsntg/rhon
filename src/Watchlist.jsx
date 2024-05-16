@@ -55,8 +55,7 @@ const Watchlist = ({ cryptoData, favorites }) => {
             return (
               <Link to={`/crypto/${crypto.id}`} key={index}>
                 <div className={`crypto-card ${viewMode === 'list'? 'list' : ''}`}> 
-                  <div className="left-side">
-                    <div className="crypto-image">
+                <div className="crypto-image">
                       <img
                         src={crypto.image}
                         alt={crypto.name}
@@ -64,6 +63,7 @@ const Watchlist = ({ cryptoData, favorites }) => {
                       />
                     </div>
                     <h3>{crypto.name}</h3>
+                  <div className="left-side">
                     {viewMode === 'list' && chartData && (
                       <div className="watchlist-chart">
                         <Line
