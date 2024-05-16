@@ -499,8 +499,12 @@ select {
 
   h1 {
     font-size: 40px;
-   
-    
+    margin-top: 90px;
+  }
+
+  .main-content {
+    flex-grow: 1;
+    margin-left: 5%;
   }
   
   .sidebar {
@@ -537,6 +541,24 @@ select {
     height:100%;
   }
 
+  .asset-card {
+    border: 3px solid white;
+    background: white;
+    border-radius: 8px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    margin-right:20px;
+  }
+
+  .centered-table {
+    margin: auto;
+    margin-top: 20px;
+    width: 100%;
+  }
+
   .search {
     height: 35px;
     width: 250px;
@@ -552,7 +574,8 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: -100px;
+    margin-left: -90px;
+    margin-top:-10px;
   }
   
   .searchCoin {
@@ -572,6 +595,9 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: -100px;
+    margin-top: 20px;
+
   }
 
   .buy-sell-card-container {
@@ -583,8 +609,10 @@ select {
   .buy-sell-card {
     padding: 10px; /* Adjust padding for smaller screens */
     position: relative; /* Keep absolute positioning */
-    left: 46%; /* Position the card horizontally in the center */
+    left: 70%; /* Position the card horizontally in the center */
     transform: translateX(-90%); /* Center the card horizontally */
+    margin-top: 30px;
+    margin-left: 50px;
   }
 
   .crypto-cards {
