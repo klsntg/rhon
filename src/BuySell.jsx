@@ -34,6 +34,7 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets }) => {
         setBuyOrSell(option);
         setButtonText(option === "buy" ? "Buy" : "Sell"); // Change button text based on action
     };
+    
 
     const handleAmountChange = (e) => {
         const inputValue = parseFloat(e.target.value);
@@ -60,6 +61,22 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets }) => {
     };
 
     const handleBuy = () => {
+
+        if (!amount) {
+            alert("Input value.");
+            return;
+          }
+
+        const confirmationMessage = "Are you sure you want to complete this transaction?";
+                const confirmed = window.confirm(confirmationMessage);
+                if (confirmed) {
+                  if (buyOrSell === "buy") {
+                    alert("Transaction is successful.");
+                  } else {
+                    alert("Transaction is successful.");
+                  }
+                }
+                
         if (buyOrSell === "buy") {
             if (usdtValue <= cryptoAssets.find(asset => asset.symbol === "USDT").amount) {
                 setCryptoAssets((prevAssets) => {
@@ -86,6 +103,8 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets }) => {
             } else {
                 alert("Insufficient USDT balance to complete purchase.");
             }
+
+            
         } else { // Sell logic
             const coinExists = cryptoAssets.some((asset) => asset.symbol === selectedCoin.symbol.toUpperCase());
             if (coinExists) {
