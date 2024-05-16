@@ -43,7 +43,7 @@ const CryptoDetails = ({ cryptoData }) => {
 
   return (
     <div>
-      <h1>Historical Price Chart (Last {days} {days === 1 ? "Day" : "Days"})</h1>
+      <h1>Historical Price Chart (Last {days} {days === 1? "Day" : "Days"})</h1>
       <div className="button-days">
         <button onClick={() => handleButtonClick(1)}>1 Day</button>
         <button onClick={() => handleButtonClick(7)}>7 Days</button>
@@ -53,7 +53,9 @@ const CryptoDetails = ({ cryptoData }) => {
       <div className="chart-container" style={{ height: '600px', width: '100%' }}>
         <Line
           data={{
-            labels: chartData.map(({ time }) => new Date(time).toLocaleDateString()),
+            labels: chartData.map(({ time }) =>
+              days === 1? new Date(time).toLocaleTimeString() : new Date(time).toLocaleDateString()
+            ),
             datasets: [{
               label: 'Price (USD)',
               data: chartData.map(({ price }) => price),
