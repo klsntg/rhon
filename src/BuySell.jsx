@@ -211,7 +211,7 @@ const BuySell = ({ cryptoData, cryptoAssets, setCryptoAssets }) => {
                 </>
             ) : (
                 <div>
-                    <p>Please select a coin from the search bar.</p>
+                    <p className="search-text">Please select a coin from the search bar.</p>
                 </div>
             )}
         </div>
